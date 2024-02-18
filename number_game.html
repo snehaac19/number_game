@@ -1,0 +1,138 @@
+<html>
+    <head>
+        <style>
+            #startnew{
+                display:none;
+            }
+            body{
+                background-color: rgb(0, 0, 0);
+            }
+            #title
+            {
+                font-size:400%;
+                text-align:center;
+                color:rgba(255, 25, 25, 0.921);
+            }
+            #des
+            {
+                position:absolute;
+                color:rgb(153, 0, 255);
+                right:25%;
+                top:15%;
+                width: 700px;
+                animation: scrollText 15s linear infinite; /* Animation name, duration, timing function, and iteration count */
+            }
+
+            @keyframes scrollText {
+            0% {
+             transform: translateX(-100%); 
+               }
+            100% {
+              transform: translateX(100%); 
+              }
+            }
+            #clue
+            {
+                color:aliceblue;
+            }
+            #right
+            {
+                color:aliceblue;
+            }
+            #guess
+            {
+                position:absolute;
+                left:33%;
+                top:50%;
+                font-size:180%;
+                color:aliceblue;
+            }
+            #startnew
+            {
+                position:absolute;
+                left:33%;
+                top:64%;
+                font-size:140%;
+            }
+            #num{
+                position:absolute;
+                left:50%;
+                top:36%;
+                font-size:120%;
+            }
+            #check
+            {
+                position:absolute;
+                left:33%;
+                top:46%;
+                width:36%;
+                font-size:126%;
+            }
+            #enter
+            {
+                position:absolute;
+                left:33%;
+                top:35%;
+                font-size:180%;
+                color:aliceblue;
+            }
+
+        </style>
+    </head>
+    <body>
+        <h1 id="title"><b>NUMBER GAME</b></h1>
+        <p id="des">The game is to take a number between 1 to 100 and you need to guess the number within 10 attempts</p>
+        <div id="enter">Enter the number :</div><input type="number" id="num">
+        <button id="check"onclick="check()">check</button>
+        <p id="guess">Previous guess:</p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <div id="right"></div>
+        <div id="clue"></div>
+        <button id="startnew" onclick="location.reload()">Start new game</button>
+    </body>
+    <script>
+        count=0;
+        function randomgenerate()
+        {
+        number=(Math.floor(Math.random()*(101)));
+        if(number==0)
+        number=1;
+        return number; 
+        
+        }
+        num=randomgenerate()
+        console.log(num);
+        function check()
+        {
+            if(count>10)
+            {
+                alert("Chances are done")
+                document.getElementById("num").diasable=true;
+                document.getElementById("startnew").style.display="block";
+            }
+            else{
+                count=count+1;
+                val=document.getElementById("num").value;
+                document.getElementById("guess").innerHTML+=val+" ";
+                if(val>num)
+                {
+                    document.getElementById("right").innerHTML="Wrong";
+                    document.getElementById("right").style.backgroundColor="red";
+                    document.getElementById("clue").innerHTML="Guessed value is greater than the answer";
+                }
+                else if(val==num)
+                {
+                    document.getElementById("right").innerHTML="Right";
+                    document.getElementById("right").style.backgroundColor="green";
+                    document.getElementById("clue").innerHTML="Congratulations! YOU WON";
+                    document.getElementById("num").disabled=true;
+                    document.getElementById("startnew").style.display="block";
+                }
+                else{
+                    document.getElementById("right").innerHTML="Wrong";
+                    document.getElementById("right").style.backgroundColor="red";
+                    document.getElementById("clue").innerHTML="Guessed value is lesser than the answer";
+                }
+            }
+        }
+    </script>
+</html>
